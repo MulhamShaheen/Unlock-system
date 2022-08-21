@@ -1,0 +1,107 @@
+<!doctype html>
+{% load static  %}
+{#<!--{% load compress  %}-->#}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <base href=".">
+    <title>Title</title>
+</head>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}?ssasss2">
+<body>
+
+
+<header role="banner">
+    <img class="logo" src="{% static '/img/logo.svg' %} "/>
+</header>
+<main role="main">
+    <div class="video-container">
+        <video id="webcam-preview"></video>
+    </div>
+    <div id="app">
+        <div class="result-preview">
+            <p id="result"></p>
+            <!--   <p>Иван Иванов</p>-->
+        </div>
+        <div class="div-wrapper">
+
+            <button class="scan-btn" v-on:click="send">Отметить</button>
+        </div>
+    </div>
+
+
+</main>
+
+<script>
+
+
+    var app = new Vue({
+        delimiters: ['{', '}'],
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            detected: false,
+            value: null,
+        },
+        mounted() {
+            console.log(this.message)
+
+            const codeReader = new ZXing.BrowserQRCodeReader();
+            codeReader.decodeFromVideoDevice(null, 'webcam-preview', (result, err) => {
+                if (result) {
+                    this.value = result.text
+                    console.log(this.value)
+                    this.detected = true
+                    console.log('Found QR code!', result)
+
+                }
+
+                if (err) {
+
+                    if (err instanceof ZXing.NotFoundException) {
+                        console.log('No QR code found.')
+                    }
+
+                    if (err instanceof ZXing.ChecksumException) {
+                        console.log('A code was found, but it\'s read value was not valid.')
+                    }
+
+                    if (err instanceof ZXing.FormatException) {
+                        console.log('A code was found, but it was in a invalid format.')
+                    }
+                }
+            })
+        },
+        methods: {
+            test: () => {
+                console.log("Asdsa")
+            },
+            send() {
+                document.getElementById('result').textContent = ""
+                var value = this.value
+                console.log("Value:", value)
+                axios.post(document.location.href, {
+                    result: value,
+                }).then(function (response) {
+                    console.log(response.data.msg)
+                    document.getElementById('result').textContent = response.data.msg
+                })
+            }
+        }
+    })
+</script>
+
+<script>
+
+
+</script>
+</body>
+
+</html>
