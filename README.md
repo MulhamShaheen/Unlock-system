@@ -2,7 +2,7 @@
 This system was used to monitor activity, attendance, and scores of the participants at the summer camp of educational project [Unlock](https://vk.com/unlock_shift)
 
 ### Table of contents
-* [Technologies and Skills](#technologies_and_skills)
+* [Technologies and Skills](#technologies-and-skills)
 * [Structure](#structure)
 * [Functionality](#functionality)
 
