@@ -1,13 +1,29 @@
 # Unlock22-api
-The application was used to monitor activity, attendence, and socres of the participantes at the summer camp of educational project [Unlock](https://vk.com/unlock_shift)
+This system was used to monitor activity, attendence, and socres of the participantes at the summer camp of educational project [Unlock](https://vk.com/unlock_shift)
 
 ## Table of contents
-* General Information
+* [Technologies and Skills](#technologies_and_skills)
+* [Structure](#structure)
 * [Functionality](#functionality)
-* [Technologies](#technologies)
+
+## Technologies and Skills
+
+The stack that was used:
+* Django
+* Django Restful Framework 
+* Vue.js
+
+During development the following skills were used and improved:
+1. RESTful API design
+2. Databases design
+3. Working with high load
+4. Implimenting third party JS libraries
+5. Rapide maintenance and bug fixing
 
 ## Structure
-The projects consets of two application apps.
+
+The projects consets of two applications
+
 ### Score Manager
 Which managed data of participants, teams, and their scores
 
@@ -28,6 +44,7 @@ Through this panal, orginizers could create events and activities, distrebute po
 
 ### QR Scanner 
 To create a conviniant way to keep count of active participantes, a QR scanner was added to the system. 
+
 #### How does it work: 
 1. Admin sends a link that contains id of an event `/qr/scan/{id:int}`
 2. Orginizers scan the personal QR code of the participants
@@ -44,6 +61,12 @@ Every participant has access to telegram bot [Cherlock](/), which has following 
 4. Activating promocodes
 The answers and results of the functions above is saved in the database, and available for review by admins later. 
 
-Such functions are generated on the backend for further requests from the [chatbot]()   
+Such functions are generated on the backend for further requests from the [chatbot]()
 
-## Technologies
+### Score Monitoring
+
+After every event or activity, points are added accordingly to participants and teams, these information are updated in real time, and can be viewed by admins 
+
+<img src="./images/team_monitoring.png" alt="drawing" width="750"/>
+
+
